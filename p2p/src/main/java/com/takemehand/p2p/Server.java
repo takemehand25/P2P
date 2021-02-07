@@ -1,8 +1,6 @@
 package com.takemehand.p2p;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
+import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +9,7 @@ import java.util.Map;
  * @date: 2021-02-07.
  */
 public class Server {
-	public volatile static Map<String, DatagramPacket> router = new HashMap<>();
+	public volatile static Map<String, SocketAddress> router = new HashMap<>();
 	public static DatagramSocket server;
 
 	public static void init() {
@@ -38,7 +36,7 @@ public class Server {
 					String msg = new String(data,0,dp.getLength(),"UTF-8");
 					System.out.println("收到来自["+dp.getSocketAddress()+"]的消息内容是 : "+msg);
 					// 存入
-					router.put(msg,dp);
+					router.put(msg,dp.getSocketAddress());
 
 				}catch (Exception e){
 					System.err.println("消息中心异常");

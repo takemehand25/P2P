@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.DatagramPacket;
+import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,10 +20,10 @@ import java.util.Map;
 public class RouterController {
 
 	@GetMapping("/getRouter")
-	public List<DatagramPacket> getRouter(){
-		List<DatagramPacket> list = new ArrayList<>();
+	public List<SocketAddress> getRouter(){
+		List<SocketAddress> list = new ArrayList<>();
 		System.out.println("路由表"+Server.router);
-		for (Map.Entry<String, DatagramPacket> entry : Server.router.entrySet()) {
+		for (Map.Entry<String, SocketAddress> entry : Server.router.entrySet()) {
 			list.add(entry.getValue());
 		}
 		System.out.println(list);
